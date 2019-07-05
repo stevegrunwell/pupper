@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\Post as PostResource;
+use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,7 +20,9 @@ class HomeController extends Controller
     public function index()
     {
         if (Auth::check()) {
-            return view('timeline');
+            return view('timeline')->with([
+                'posts' => PostResource::collection(Post::all()),
+            ]);
         }
 
         return view('home');
