@@ -2,9 +2,11 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
+use App\Post;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
@@ -38,6 +40,15 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
+        'id'                => 'string',
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * A user can have any number of posts.
+     */
+    public function posts(): HasMany
+    {
+        return $this->hasMany(Post::class);
+    }
 }

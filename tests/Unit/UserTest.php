@@ -27,4 +27,16 @@ class UserTest extends TestCase
             'username' => 'someusername',
         ]);
     }
+
+    /**
+     * @test
+     * @group Posts
+     */
+    public function users_can_have_many_posts()
+    {
+        $user = factory(User::class)->create();
+        $user->posts()->saveMany(factory(Post::class, 3)->make());
+
+        $this->assertCount(3, $user->posts);
+    }
 }
