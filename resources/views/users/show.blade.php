@@ -4,7 +4,13 @@
 <div class="container">
     <div class="row">
         <div class="col-md-4">
-            @include('users.card', ['user' => auth()->user()])
+            <article class="card">
+                <div class="card-body">
+                    <h1 class="card-title h5">{{ $user->display_name }}</h1>
+                    <p class="card-subtitle text-muted">{{ $user->username }}</p>
+                    <p>{{ __('Joined :date', ['date' => $user->created_at->format('F Y')]) }}</p>
+                </div>
+            </article>
         </div>
 
         <div class="col-md-8">

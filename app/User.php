@@ -45,6 +45,16 @@ class User extends Authenticatable
     ];
 
     /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'username';
+    }
+
+    /**
      * A user can have any number of posts.
      */
     public function posts(): HasMany
