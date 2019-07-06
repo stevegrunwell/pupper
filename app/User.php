@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -58,5 +59,40 @@ class User extends Authenticatable
     public function posts(): HasMany
     {
         return $this->hasMany(Post::class);
+    }
+
+    /**
+     * A user can follow other users.
+     */
+    public function following(): BelongsToMany
+    {
+        return $this->belongsToMany(self::class, 'user_follows', 'user_id', 'target_id')
+            ->as('accounts')
+            ->withTimestamps();
+    }
+
+    /**
+     * A user can be followed.
+     */
+    public function followers(): BelongsToMany
+    {
+        return $this->belongsToMany(self::class, 'user_follows', 'target_id', 'user_id')
+            ->as('accounts');
+    }
+
+    /**
+     * Determine if this user follow the given $user.
+     */
+    public function follows(User $user): bool
+    {
+        return 1 === $this->following()->where('id', $user->id)->count();
+    }
+
+    /**
+     * Determine if this user is followed by the given $user.
+     */
+    public function isFollowedBy(User $user): bool
+    {
+        return 1 === $this->followers()->where('id', $user->id)->count();
     }
 }
