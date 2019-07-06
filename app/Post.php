@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Scopes\ReverseChronologicalOrderScope;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -36,6 +37,18 @@ class Post extends Model
      * @var string
      */
     protected $keyType = 'string';
+
+    /**
+     * The "booting" method of the model.
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope(new ReverseChronologicalOrderScope);
+    }
 
     /**
      * A post belongs to one user.

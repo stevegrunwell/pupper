@@ -4,6 +4,7 @@ namespace Tests\Unit;
 
 use App\Post;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -13,6 +14,28 @@ use Tests\TestCase;
 class PostTest extends TestCase
 {
     use RefreshDatabase;
+
+    /**
+     * @test
+     */
+    public function posts_are_ordered_by_post_date_by_default()
+    {
+        $first  = factory(Post::class)->create([
+            'created_at' => Carbon::now()->subDays(2),
+        ]);
+        $second = factory(Post::class)->create([
+            'created_at' => Carbon::now()->subDays(1),
+        ]);
+        $third  = factory(Post::class)->create([
+            'created_at' => Carbon::now(),
+        ]);
+
+        $this->assertSame([
+            $third->id,
+            $second->id,
+            $first->id,
+        ], Post::all()->pluck('id')->toArray());
+    }
 
     /**
      * @test
@@ -41,6 +64,6 @@ class PostTest extends TestCase
         $expected = $users->load('posts')->pluck('posts.*.id')->flatten();
 
         $this->assertCount(6, $postIds);
-        $this->assertEquals($expected, $postIds);
+        $this->assertEquals($expected->sort(), $postIds->sort());
     }
 }
