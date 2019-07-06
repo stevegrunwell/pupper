@@ -39,4 +39,32 @@ class UserTest extends TestCase
 
         $this->assertCount(3, $user->posts);
     }
+
+    /**
+     * @test
+     * @group Relationships
+     */
+    public function users_can_follow_other_users()
+    {
+        $users = factory(User::class, 2)->create();
+
+        $users[0]->following()->save($users[1]);
+
+        $this->assertCount(1, $users[0]->following);
+        $this->assertTrue($users[0]->following()->first()->is($users[1]));
+    }
+
+    /**
+     * @test
+     * @group Relationships
+     */
+    public function users_can_be_followed_by_other_users()
+    {
+        $users = factory(User::class, 2)->create();
+
+        $users[0]->following()->save($users[1]);
+
+        $this->assertCount(1, $users[1]->followers);
+        $this->assertTrue($users[1]->followers()->first()->is($users[0]));
+    }
 }
