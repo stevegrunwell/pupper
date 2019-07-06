@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d2c92017b4f8cef031eee077e751db42",
+    "content-hash": "9b2d7843f95f91ffcc3f6533fba14d63",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -3269,6 +3269,43 @@
             "time": "2019-02-13T09:37:52+00:00"
         },
         {
+            "name": "mohammedmanssour/form-request-tester",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mohammedmanssour/form-request-tester.git",
+                "reference": "af75375c68606f7b8a8b6377c493781cf995a4b4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mohammedmanssour/form-request-tester/zipball/af75375c68606f7b8a8b6377c493781cf995a4b4",
+                "reference": "af75375c68606f7b8a8b6377c493781cf995a4b4",
+                "shasum": ""
+            },
+            "require-dev": {
+                "orchestra/testbench": "~3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "MohammedManssour\\FormRequestTester\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mohammed Manssour",
+                    "email": "manssour.mohammed@gmail.com",
+                    "homepage": "https://mohammedmanssour.me"
+                }
+            ],
+            "description": "a collection of test helpers that help test form requests",
+            "time": "2019-02-07T21:23:23+00:00"
+        },
+        {
             "name": "myclabs/deep-copy",
             "version": "1.9.1",
             "source": {
@@ -4800,11 +4837,16 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "mohammedmanssour/form-request-tester": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": "^7.1.3"
     },
-    "platform-dev": []
+    "platform-dev": [],
+    "platform-overrides": {
+        "php": "7.3"
+    }
 }

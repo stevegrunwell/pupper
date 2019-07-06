@@ -15,6 +15,7 @@
         "fzaninotto/faker": "^1.4",
         "laravel/homestead": "^8.6",
         "mockery/mockery": "^1.0",
+        "mohammedmanssour/form-request-tester": "dev-master",
         "nunomaduro/collision": "^3.0",
         "phpunit/phpunit": "^8.0"
     },
