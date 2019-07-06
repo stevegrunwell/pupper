@@ -17,7 +17,8 @@
         "mockery/mockery": "^1.0",
         "mohammedmanssour/form-request-tester": "dev-master",
         "nunomaduro/collision": "^3.0",
-        "phpunit/phpunit": "^8.0"
+        "phpunit/phpunit": "^8.0",
+        "squizlabs/php_codesniffer": "^3.4"
     },
     "autoload": {
         "psr-4": {
@@ -38,6 +39,9 @@
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
         ],
+        "coding-standards": [
+            "vendor/bin/phpcs"
+        ],
         "homestead": [
             "@prepare-env",
             "@php vendor/bin/homestead make"
@@ -48,6 +52,7 @@
         ]
     },
     "scripts-descriptions": {
+        "coding-standards": "Check the application coding standards",
         "homestead": "Build a development environment using Laravel Homestead.",
         "prepare-env": "Copy the .env.example file and generate an application key."
     },

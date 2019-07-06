@@ -32,7 +32,6 @@ Route::middleware(['auth'])->group(function () {
         'create' => 'posts.create',
         'store'  => 'posts.store',
     ]);
-
 });
 
 // All users can see posts.
