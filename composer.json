@@ -17,6 +17,7 @@
         "mockery/mockery": "^1.0",
         "mohammedmanssour/form-request-tester": "dev-master",
         "nunomaduro/collision": "^3.0",
+        "nunomaduro/larastan": "^0.3.17",
         "phpunit/phpunit": "^8.0",
         "squizlabs/php_codesniffer": "^3.4"
     },
@@ -49,12 +50,16 @@
         "prepare-env": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
             "@php artisan key:generate --ansi"
+        ],
+        "static-analysis": [
+            "@php artisan code:analyse"
         ]
     },
     "scripts-descriptions": {
-        "coding-standards": "Check the application coding standards",
+        "coding-standards": "Check the application coding standards.",
         "homestead": "Build a development environment using Laravel Homestead.",
-        "prepare-env": "Copy the .env.example file and generate an application key."
+        "prepare-env": "Copy the .env.example file and generate an application key.",
+        "static-analysis": "Perform static code analysis on the codebase."
     },
     "minimum-stability": "dev",
     "prefer-stable": true,

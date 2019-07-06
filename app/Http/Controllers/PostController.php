@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreatePost;
 use App\Http\Resources\Post as PostResource;
 use App\Post;
+use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
@@ -12,10 +13,8 @@ class PostController extends Controller
 {
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(): Renderable
     {
         return view('posts.create');
     }
@@ -33,11 +32,8 @@ class PostController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param  \App\Post  $post
-     * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show(Post $post): Renderable
     {
         return view('posts.show')->with([
             'post' => new PostResource($post),
