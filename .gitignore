@@ -7,8 +7,10 @@ Homestead.yaml
 node_modules
 npm-debug.log
 public/css/*.css
+public/css/*.map
 public/hot
 public/js/*.js
+public/js/*.map
 public/mix-manifest.json
 public/storage
 storage/*.key
