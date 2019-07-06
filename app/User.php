@@ -44,6 +44,13 @@ class User extends Authenticatable
     ];
 
     /**
+     * The "type" of the primary key ID.
+     *
+     * @var string
+     */
+    protected $keyType = 'string';
+
+    /**
      * Get the route key for the model.
      *
      * @return string
