@@ -8,10 +8,11 @@
         "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
         "prod": "npm run production",
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-        "test": "jest",
+        "test": "cross-env NODE_ENV=test jest",
         "test-watch": "npm run test -- --watch"
     },
     "devDependencies": {
+        "@babel/polyfill": "^7.4.4",
         "@vue/test-utils": "^1.0.0-beta.29",
         "axios": "^0.18",
         "babel-core": "^7.0.0-bridge.0",
