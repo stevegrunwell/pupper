@@ -7,6 +7,7 @@ use App\User;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class UserController extends Controller
 {
@@ -23,12 +24,14 @@ class UserController extends Controller
 
     /**
      * Follow a user.
+     *
+     * @throws \Symfony\Component\HttpKernel\Exception\HttpException
      */
     public function follow(User $user, Request $request): RedirectResponse
     {
         // A user cannot follow themselves.
         if ($user->id === $request->user()->id) {
-            return abort(403);
+            throw new HttpException(403, 'Users may not follow themselves');
         }
 
         if (! $request->user()->follows($user)) {
