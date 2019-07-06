@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Resources\Post as PostResource;
 use App\User;
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -17,5 +19,29 @@ class UserController extends Controller
             'posts' => PostResource::collection($user->posts),
             'user'  => $user,
         ]);
+    }
+
+    /**
+     * Follow a user.
+     */
+    public function follow(User $user, Request $request): RedirectResponse
+    {
+        if (! $request->user()->follows($user)) {
+            $request->user()->following()->attach($user->id);
+        }
+
+        return redirect(route('users.show', ['user' => $user]));
+    }
+
+    /**
+     * Unfollow a user.
+     */
+    public function unfollow(User $user, Request $request): RedirectResponse
+    {
+        if ($request->user()->follows($user)) {
+            $request->user()->following()->detach($user->id);
+        }
+
+        return redirect(route('users.show', ['user' => $user]));
     }
 }

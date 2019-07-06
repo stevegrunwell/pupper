@@ -67,4 +67,30 @@ class UserTest extends TestCase
         $this->assertCount(1, $users[1]->followers);
         $this->assertTrue($users[1]->followers()->first()->is($users[0]));
     }
+
+    /**
+     * @test
+     * @group Relationships
+     */
+    public function test_follows()
+    {
+        $users = factory(User::class, 3)->create();
+        $users[0]->following()->attach($users[1]->id);
+
+        $this->assertTrue($users[0]->follows($users[1]));
+        $this->assertFalse($users[0]->follows($users[2]));
+    }
+
+    /**
+     * @test
+     * @group Relationships
+     */
+    public function test_isFollowedBy()
+    {
+        $users = factory(User::class, 3)->create();
+        $users[0]->followers()->attach($users[1]->id);
+
+        $this->assertTrue($users[0]->isFollowedBy($users[1]));
+        $this->assertFalse($users[0]->isFollowedBy($users[2]));
+    }
 }

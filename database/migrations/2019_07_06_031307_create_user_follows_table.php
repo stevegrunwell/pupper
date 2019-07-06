@@ -20,6 +20,7 @@ class CreateUserFollowsTable extends Migration
 
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('target_id')->references('id')->on('users');
+            $table->unique(['user_id', 'target_id']);
         });
     }
 

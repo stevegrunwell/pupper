@@ -31,6 +31,11 @@ Route::middleware(['auth'])->group(function () {
         'create' => 'posts.create',
         'store'  => 'posts.store',
     ]);
+
+    // Following and unfollowing other users.
+    Route::post('{user}/follow', 'UserController@follow')
+        ->name('users.follow');
+    Route::delete('{user}/follow', 'UserController@unfollow');
 });
 
 // All users can see posts.
