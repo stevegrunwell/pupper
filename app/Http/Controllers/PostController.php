@@ -7,7 +7,6 @@ use App\Http\Resources\Post as PostResource;
 use App\Post;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 
 class PostController extends Controller
 {

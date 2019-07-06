@@ -3,7 +3,6 @@
 namespace Tests\Unit;
 
 use App\Http\Requests\CreatePost;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use MohammedManssour\FormRequestTester\TestsFormRequests;
 use Tests\TestCase;
 

@@ -2,7 +2,6 @@
 
 namespace Tests\Feature;
 
-use App\Http\Resources\Post as PostResource;
 use App\Post;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
