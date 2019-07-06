@@ -85,6 +85,19 @@ class UsersTest extends TestCase
      * @test
      * @group Relationships
      */
+    public function a_user_cannot_follow_themselves()
+    {
+        $user = factory(User::class)->create();
+
+        $this->actingAs($user)
+            ->post(route('users.follow', ['user' => $user]))
+            ->assertForbidden();
+    }
+
+    /**
+     * @test
+     * @group Relationships
+     */
     public function a_user_can_unfollow_another_user()
     {
         $users = factory(User::class, 2)->create();

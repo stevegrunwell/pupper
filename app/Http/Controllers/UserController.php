@@ -26,6 +26,11 @@ class UserController extends Controller
      */
     public function follow(User $user, Request $request): RedirectResponse
     {
+        // A user cannot follow themselves.
+        if ($user->id === $request->user()->id) {
+            return abort(403);
+        }
+
         if (! $request->user()->follows($user)) {
             $request->user()->following()->attach($user->id);
         }
