@@ -18,7 +18,7 @@ Route::namespace('Api')->name('api.')->group(function () {
         ->name('posts.show');
 
     // Routes that require authentication.
-    Route::middleware('auth:api')->group(function () {
+    Route::middleware('auth')->group(function () {
         Route::get('timeline', 'TimelineController@index')
             ->name('timeline');
 

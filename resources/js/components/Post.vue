@@ -1,5 +1,5 @@
 <template>
-    <article>
+    <article class="card-body border-bottom border-default">
         {{ content }}
     </article>
 </template>

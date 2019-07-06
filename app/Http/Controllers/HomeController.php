@@ -18,9 +18,7 @@ class HomeController extends Controller
     public function index(): Renderable
     {
         if (Auth::check()) {
-            return view('timeline')->with([
-                'posts' => PostResource::collection(Post::all()),
-            ]);
+            return view('timeline');
         }
 
         return view('home');

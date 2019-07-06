@@ -4,14 +4,16 @@ import Post from './Post';
 
 function createComponent(props) {
     return shallowMount(Post, {
-        props: factory('Post', props),
+        propsData: factory('Post', props),
     });
 }
 
 describe('Post', () => {
-  test('is a Vue instance', () => {
-    const wrapper = createComponent();
+    describe('Construction', () => {
+        test('is a Vue instance', () => {
+            const wrapper = createComponent();
 
-    expect(wrapper.isVueInstance()).toBeTruthy()
-  })
+            expect(wrapper.isVueInstance()).toBeTruthy()
+        });
+    });
 });

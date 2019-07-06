@@ -55,14 +55,14 @@ class RouteServiceProvider extends ServiceProvider
     /**
      * Define the "api" routes for the application.
      *
-     * These routes are typically stateless.
+     * For this application (since it's just meant to be a demo), the API *has* state.
      *
      * @return void
      */
     protected function mapApiRoutes()
     {
         Route::prefix('api')
-            ->middleware('api')
+            ->middleware('web')
             ->namespace($this->namespace)
             ->group(base_path('routes/api.php'));
     }
