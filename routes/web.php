@@ -18,10 +18,6 @@ Auth::routes();
 Route::get('/', 'HomeController@index')
     ->name('home');
 
-// All users can see posts.
-Route::get('barks/{post}', 'PostController@show')
-    ->name('posts.show');
-
 // Routes only available to logged-in users.
 Route::middleware(['auth'])->group(function () {
 
@@ -38,6 +34,10 @@ Route::middleware(['auth'])->group(function () {
     ]);
 
 });
+
+// All users can see posts.
+Route::get('barks/{post}', 'PostController@show')
+    ->name('posts.show');
 
 // Registering last to ensure usernames can't hijack other routes.
 Route::get('{user}', 'UserController@show')
