@@ -13,17 +13,23 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')
-    ->namespace('Api')
-    ->name('api.')
-    ->group(function () {
+Route::namespace('Api')->name('api.')->group(function () {
+    Route::get('posts/{post}', 'PostController@show')
+        ->name('posts.show');
+
+    // Routes that require authentication.
+    Route::middleware('auth:api')->group(function () {
+        Route::get('timeline', 'TimelineController@index')
+            ->name('timeline');
+
         Route::apiResource('posts', 'PostController')
             ->except([
+                'show',
                 'update',
             ])
             ->names([
                 'store'   => 'posts.store',
-                'update'  => 'posts.update',
                 'destroy' => 'posts.destroy',
             ]);
     });
+});
