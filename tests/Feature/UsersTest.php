@@ -25,7 +25,7 @@ class UsersTest extends TestCase
         $response->assertViewIs('users.show');
         $response->assertViewHas([
             'posts',
-            'user'
+            'user',
         ]);
     }
 

@@ -28,7 +28,7 @@ Route::middleware(['auth'])->group(function () {
         'edit',
         'update',
     ])
-    ->names([
+        ->names([
         'create' => 'posts.create',
         'store'  => 'posts.store',
     ]);
