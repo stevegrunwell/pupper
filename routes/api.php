@@ -13,6 +13,17 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::middleware('auth:api')
+    ->namespace('Api')
+    ->name('api.')
+    ->group(function () {
+        Route::apiResource('posts', 'PostController')
+            ->except([
+                'update',
+            ])
+            ->names([
+                'store'   => 'posts.store',
+                'update'  => 'posts.update',
+                'destroy' => 'posts.destroy',
+            ]);
+    });

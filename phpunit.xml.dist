@@ -18,6 +18,11 @@
             <directory suffix="Test.php">./tests/Feature</directory>
             <exclude>./tests/Feature/ExampleTest.php</exclude>
         </testsuite>
+
+        <testsuite name="API">
+            <directory suffix="Test.php">./tests/Api</directory>
+            <exclude>./tests/Api/ExampleTest.php</exclude>
+        </testsuite>
     </testsuites>
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">

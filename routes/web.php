@@ -28,8 +28,9 @@ Route::middleware(['auth'])->group(function () {
         'edit',
         'update',
     ])->names([
-        'create' => 'posts.create',
-        'store'  => 'posts.store',
+        'create'  => 'posts.create',
+        'store'   => 'posts.store',
+        'destroy' => 'posts.destroy',
     ]);
 });
 
