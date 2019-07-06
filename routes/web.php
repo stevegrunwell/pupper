@@ -27,8 +27,7 @@ Route::middleware(['auth'])->group(function () {
         'show', // Excluded since posts.show is defined elsewhere.
         'edit',
         'update',
-    ])
-        ->names([
+    ])->names([
         'create' => 'posts.create',
         'store'  => 'posts.store',
     ]);
