@@ -32,4 +32,7 @@ Route::namespace('Api')->name('api.')->group(function () {
                 'destroy' => 'posts.destroy',
             ]);
     });
+
+    Route::get('{user}/posts', 'TimelineController@user')
+        ->name('userTimeline');
 });

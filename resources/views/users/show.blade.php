@@ -27,9 +27,7 @@
 
         <div class="col-md-8">
             <div class="card">
-                @foreach ($posts as $post)
-                    @include('posts.timeline', ['post' => $post])
-                @endforeach
+                <Timeline route="{{ route('api.userTimeline', ['user' => $user]) }}" />
             </div>
         </div>
     </div>

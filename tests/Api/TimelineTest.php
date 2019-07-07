@@ -87,4 +87,20 @@ class TimelineTest extends TestCase
                 'id' => $post->id,
             ]);
     }
+
+    /**
+     * @test
+     */
+    public function a_user_timeline_should_only_include_posts_from_the_user()
+    {
+        $ids = $this->following[0]->posts()->saveMany(factory(Post::class, 3)->make());
+        $this->following[1]->posts()->saveMany(factory(Post::class, 2)->make());
+
+        $response = $this->get(route('api.userTimeline', ['user' => $this->following[0]]));
+
+        $this->assertEquals(
+            $ids->pluck('id')->sort(),
+            $response->original->pluck('id')->sort()
+        );
+    }
 }
