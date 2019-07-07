@@ -2,10 +2,9 @@
 
 namespace App\Http\Resources;
 
-use App\Http\Resources\User;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class Post extends JsonResource
+class User extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,10 +16,9 @@ class Post extends JsonResource
     public function toArray($request)
     {
         return [
-            'id'        => $this->id,
-            'content'   => $this->content,
-            'createdAt' => $this->created_at->toAtomString(),
-            'user'      => new User($this->user),
+            'id'          => $this->id,
+            'username'    => $this->username,
+            'displayName' => $this->display_name,
         ];
     }
 }

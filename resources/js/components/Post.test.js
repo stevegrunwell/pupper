@@ -10,10 +10,32 @@ function createComponent(props) {
 
 describe('Post', () => {
     describe('Construction', () => {
-        test('is a Vue instance', () => {
+        it('is a Vue instance', () => {
             const wrapper = createComponent();
 
             expect(wrapper.isVueInstance()).toBeTruthy()
         });
     });
+
+    describe('Display', () => {
+        it('includes the display name of the author', () => {
+            const wrapper = createComponent({
+                user: {
+                    displayName: 'Test McTest',
+                },
+            });
+
+            expect(wrapper.text()).toContain('Test McTest');
+        });
+
+        it('includes the username of the author', () => {
+            const wrapper = createComponent({
+                user: {
+                    username: 'testmctest',
+                },
+            });
+
+            expect(wrapper.text()).toContain('testmctest');
+        });
+    })
 });
