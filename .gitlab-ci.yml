@@ -11,9 +11,9 @@ services:
 variables:
   DB_HOST: postgres
   DB_USERNAME: postgres
-  POSTGRES_DB: pupper_test
-  POSTGRES_USER: postgres
-  POSTGRES_PASSWORD: ""
+  DB_DATABASE: pupper_test
+  DB_USERNAME: postgres
+  DB_PASSWORD: ""
 
 # Define the "build" step of the pipeline
 #
