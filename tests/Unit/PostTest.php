@@ -55,7 +55,7 @@ class PostTest extends TestCase
      */
     public function posts_can_be_filtered_by_users()
     {
-        $users = factory(User::class, 3)->create()->each(function($user) {
+        $users = factory(User::class, 3)->create()->each(function ($user) {
             $user->posts()->saveMany(factory(Post::class, 3)->make());
         });
         $users->pop();
