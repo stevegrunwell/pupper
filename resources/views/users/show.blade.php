@@ -11,7 +11,7 @@
                     <p>{{ __('Joined :date', ['date' => $user->created_at->format('F Y')]) }}</p>
 
                     @unless (! auth()->check() || $user->id === auth()->user()->id)
-                        <form method="post" action="{{ route('users.follow', ['user' => $user]) }}">
+                        <form method="post" action="{{ route('api.users.follow', ['user' => $user]) }}">
                             @if (auth()->user()->follows($user))
                                 <button type="submit" class="btn btn-secondary">{{ __('Unfollow') }}</button>
                                 @method('DELETE')
