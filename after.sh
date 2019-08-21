@@ -14,7 +14,7 @@ cd ~/code || exit 1
 
 # Install npm dependencies and build site scripts/styles.
 npm install
-npm run dev
+npm run dev -- --no-progress
 
 # Run database migrations
 php artisan migrate
