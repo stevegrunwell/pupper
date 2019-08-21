@@ -16,5 +16,8 @@ cd ~/code || exit 1
 npm install
 npm run dev -- --no-progress
 
-# Run database migrations
+# Run database migrations.
 php artisan migrate
+
+# Symlink /storage/app/public/ to public/storage.
+php artisan storage:link
