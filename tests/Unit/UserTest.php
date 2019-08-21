@@ -72,7 +72,7 @@ class UserTest extends TestCase
      * @test
      * @group Relationships
      */
-    public function test_follows()
+    public function follows_will_indicate_if_a_user_follows_another_user()
     {
         $users = factory(User::class, 3)->create();
         $users[0]->following()->attach($users[1]->id);
@@ -85,7 +85,7 @@ class UserTest extends TestCase
      * @test
      * @group Relationships
      */
-    public function test_isFollowedBy()
+    public function isFollowedBy_will_indicate_if_a_user_is_followed_by_another_user()
     {
         $users = factory(User::class, 3)->create();
         $users[0]->followers()->attach($users[1]->id);
