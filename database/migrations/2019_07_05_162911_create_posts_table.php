@@ -14,13 +14,22 @@ class CreatePostsTable extends Migration
     public function up()
     {
         Schema::create('posts', function (Blueprint $table) {
-            $table->uuid('id')->unique();
+            $table->uuid('id');
             $table->uuid('user_id');
+            $table->uuid('parent_id')->nullable();
             $table->text('content');
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->primary('id');
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
+            $table->foreign('parent_id')
+                ->references('id')
+                ->on('posts')
+                ->onDelete('set null');
         });
 
         DB::statement('ALTER TABLE posts ALTER COLUMN id SET DEFAULT uuid_generate_v4();');
