@@ -13,7 +13,7 @@ use App\User;
 function username(User $user): string
 {
     return sprintf(
-        '<span class="username text-muted" data-profile-url="%1$s">@%2$s</span>',
+        '<a href="%1$s" class="username text-muted">@%2$s</a>',
         route('users.show', ['user' => $user]),
         $user->username
     );

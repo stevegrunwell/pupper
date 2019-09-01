@@ -3,7 +3,12 @@
         <header class="post-meta-header">
             <p>
                 <span class="h6">{{ user.displayName }}</span>
-                <span class="text-muted">{{ user.username }}</span>
+                <a
+                    :href="user.url"
+                    class="text-muted"
+                >
+                    @{{ user.username }}
+                </a>
                 <time
                     class="text-muted"
                     :datetime="fullCreatedAt"
