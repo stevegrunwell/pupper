@@ -16,7 +16,8 @@ class TimelineController extends Controller
      */
     public function index(Request $request): ResourceCollection
     {
-        $following = $request->user()->following()->select('id')->get();
+        $following = $request->user()->following()->select('id')->get()
+            ->push($request->user()); // Include the current user's posts.
         $posts     = Post::fromUsers($following)->get();
 
         return PostResource::collection($posts);
