@@ -5,9 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Resources\Post as PostResource;
 use App\User;
 use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class UserController extends Controller
 {
