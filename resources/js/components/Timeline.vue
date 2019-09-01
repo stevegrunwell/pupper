@@ -1,5 +1,8 @@
 <template>
-    <div class="card">
+    <div
+        class="card"
+        :class="isLoading ? 'loading' : ''"
+    >
         <Post
             v-for="post in posts"
             :key="post.id"
@@ -25,6 +28,7 @@
 
         data() {
             return {
+                isLoading: true,
                 posts: [],
             }
         },
@@ -42,6 +46,7 @@
             fetch() {
                 window.axios.get(this.route)
                     .then(response => {
+                        this.isLoading = false;
                         this.posts = response.data.data;
                     })
                     .catch(err => {

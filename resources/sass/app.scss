@@ -7,6 +7,8 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+@import 'animations';
+
 .post-meta-header {
     font-size: smaller;
 }
@@ -42,4 +44,14 @@
     @extend .position-sticky;
 
     top: map-get($spacers, 4);
+}
+
+.loading {
+    &:before {
+        content: '';
+        display: block;
+        height: 5rem;
+        background: url('../img/loader.svg') center center no-repeat;
+        animation: heartbeat 1.6s infinite;
+    }
 }

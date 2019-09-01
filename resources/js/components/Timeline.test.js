@@ -1,6 +1,7 @@
 import { mount } from '@vue/test-utils';
 import axios from 'axios';
 import factory from '../factories';
+import flushPromises from 'flush-promises';
 import Post from './Post';
 import Timeline from './Timeline';
 
@@ -32,6 +33,12 @@ describe('Timeline', () => {
             expect(wrapper.isVueInstance()).toBeTruthy();
         });
 
+        it('is begins with a .loading class ', () => {
+            const wrapper = createComponent();
+
+            expect(wrapper.classes('loading')).toBe(true)
+        });
+
         it('creates Post components for each post', () => {
             const wrapper = createComponent();
             wrapper.setData({
@@ -56,5 +63,19 @@ describe('Timeline', () => {
 
             expect(axios.get).toHaveBeenCalledWith('https://example.com/api/timeline');
         });
+
+        it('removes the .loading class once posts are populated', async () => {
+            global.axios.get.mockResolvedValue({
+                data: {
+                    data: factory('Post', 2),
+                },
+            });
+
+            const wrapper = createComponent();
+
+            await flushPromises();
+
+            expect(wrapper.classes('loading')).toBe(false);
+        })
     });
 });
