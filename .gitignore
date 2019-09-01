@@ -18,3 +18,4 @@ user-customizations.sh
 Vagrantfile
 vendor
 yarn-error.log
+*.DS_Store

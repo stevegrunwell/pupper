@@ -92,7 +92,7 @@ class User extends Authenticatable
      */
     public function follows(User $user): bool
     {
-        return 1 === $this->following()->where('id', $user->id)->count();
+        return $this->following()->where('id', $user->id)->exists();
     }
 
     /**
@@ -100,6 +100,6 @@ class User extends Authenticatable
      */
     public function isFollowedBy(User $user): bool
     {
-        return 1 === $this->followers()->where('id', $user->id)->count();
+        return $this->followers()->where('id', $user->id)->exists();
     }
 }

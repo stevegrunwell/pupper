@@ -11,6 +11,7 @@ window.Vue = require('vue');
 const app = new Vue({
     el: '#app',
     components: {
+        FollowButton: require('./components/FollowButton.vue').default,
         Post: require('./components/Post.vue').default,
         Timeline: require('./components/Timeline.vue').default,
     }

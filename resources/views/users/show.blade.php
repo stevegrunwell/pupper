@@ -11,15 +11,10 @@
                     <p>{{ __('Joined :date', ['date' => $user->created_at->format('F Y')]) }}</p>
 
                     @unless (! auth()->check() || $user->id === auth()->user()->id)
-                        <form method="post" action="{{ route('users.follow', ['user' => $user]) }}">
-                            @if (auth()->user()->follows($user))
-                                <button type="submit" class="btn btn-secondary">{{ __('Unfollow') }}</button>
-                                @method('DELETE')
-                            @else
-                                <button type="submit" class="btn btn-primary">{{ __('Follow') }}</button>
-                            @endif
-                            @csrf
-                        </form>
+                        <follow-button
+                            username="{{ $user->username }}"
+                            :following="{{ auth()->user()->follows($user) ? 'true' : 'false' }}"
+                        />
                     @endunless
                 </div>
             </article>
@@ -27,7 +22,7 @@
 
         <div class="col-md-8">
             <div class="card">
-                <Timeline route="{{ route('api.userTimeline', ['user' => $user]) }}" />
+                <timeline route="{{ route('api.userTimeline', ['user' => $user]) }}" />
             </div>
         </div>
     </div>

@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -31,6 +29,12 @@ Route::namespace('Api')->name('api.')->group(function () {
                 'store'   => 'posts.store',
                 'destroy' => 'posts.destroy',
             ]);
+
+        // Following and unfollowing other users.
+        Route::post('{user}/follow', 'UserController@follow')
+            ->name('users.follow');
+        Route::delete('{user}/follow', 'UserController@unfollow')
+            ->name('users.unfollow');
     });
 
     Route::get('{user}/posts', 'TimelineController@user')
