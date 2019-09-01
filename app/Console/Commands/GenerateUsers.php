@@ -13,11 +13,13 @@ class GenerateUsers extends Command
     /**
      * The name and signature of the console command.
      *
+     * phpcs:disable Generic.Files.LineLength.TooLong
      * @var string
      */
     protected $signature = 'pupper:generate-users
                             {--earliest-date=1 year ago : The earliest sign-up date. This can be any Carbon-parsable string}
                             {--number=10                : The number of users to generate}';
+    // phpcs:enable Generic.Files.LineLength.TooLong
 
     /**
      * The console command description.
