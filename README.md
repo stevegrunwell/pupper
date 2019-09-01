@@ -46,3 +46,9 @@ $ vagrant up
 ```
 
 If everything worked properly, Pupper should be accessible via <https://pupper.test>.
+
+## Credits
+
+Iconography for the application comes from [The Noun Project](https://thenounproject.com/), and is used under a Creative-Commons License:
+
+* [Dog by Sara Quintana](https://thenounproject.com/term/dog/62011)

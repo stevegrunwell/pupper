@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Gravatar\Gravatar;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -101,5 +102,20 @@ class User extends Authenticatable
     public function isFollowedBy(User $user): bool
     {
         return $this->followers()->where('id', $user->id)->exists();
+    }
+
+    /**
+     * Retrieve the URL for a user's Gravatar.
+     *
+     * @param int $size The size (in pixels) of the Gravatar. Default is 200.
+     *
+     * @return string The URL to the user's Gravatar.
+     */
+    public function getAvatarUrl(int $size = 200): string
+    {
+        return (new Gravatar([
+            's' => $size,
+            'd' => 'wavatar',
+        ], true))->avatar($this->email);
     }
 }

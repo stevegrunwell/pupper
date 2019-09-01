@@ -91,6 +91,20 @@ class TimelineTest extends TestCase
     /**
      * @test
      */
+    public function a_users_own_posts_should_be_included_in_their_timeline()
+    {
+        $post = $this->user->posts()->save(factory(Post::class)->make());
+
+        $response = $this->actingAs($this->user, 'api')
+            ->get(route('api.timeline'))
+            ->assertJsonFragment([
+                'id' => $post->id,
+            ]);
+    }
+
+    /**
+     * @test
+     */
     public function a_user_timeline_should_only_include_posts_from_the_user()
     {
         $ids = $this->following[0]->posts()->saveMany(factory(Post::class, 3)->make());
