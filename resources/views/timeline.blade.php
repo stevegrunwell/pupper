@@ -11,7 +11,7 @@
                 </article>
             </div>
 
-            <div class="col-md-8">
+            <div class="col">
                 <Timeline route="{{ route('api.timeline') }}" />
             </div>
         </div>

@@ -14,5 +14,6 @@
     <follow-button
         username="{{ $user->username }}"
         :following="{{ auth()->user()->follows($user) ? 'true' : 'false' }}"
+        class="mt-3"
     />
 @endunless

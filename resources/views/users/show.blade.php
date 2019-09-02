@@ -12,9 +12,7 @@
         </div>
 
         <div class="col">
-            <div class="card">
-                <timeline route="{{ route('api.userTimeline', ['user' => $user]) }}" />
-            </div>
+            <timeline route="{{ route('api.userTimeline', ['user' => $user]) }}" />
         </div>
     </div>
 </div>
