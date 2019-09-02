@@ -99,8 +99,13 @@ class UserTest extends TestCase
      */
     public function getRecommendedUsers_should_suggest_relevant_users()
     {
-        $this->markTestIncomplete();
         $user = factory(User::class)->create();
+        factory(User::class, 3)->create();
+
+        $recommendedUsers = $user->getRecommendedUsers();
+
+        $this->assertContainsOnlyInstancesOf(User::class, $recommendedUsers);
+        $this->assertCount(3, $recommendedUsers);
     }
 
     /**
