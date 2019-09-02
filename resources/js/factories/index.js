@@ -18,6 +18,10 @@ factory.define('User', faker => ({
     id: faker.random.uuid(),
     username: faker.internet.userName(),
     displayName: faker.name.findName(),
+    avatar: {
+        thumbnail: 'https://example.com/avatar.png?s=200',
+        large: 'https://example.com/avatar.png?s=720',
+    },
 }));
 
 export default factory;

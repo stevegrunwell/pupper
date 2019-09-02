@@ -20,9 +20,9 @@ describe('Post', () => {
     describe('Display', () => {
         it('includes the display name of the author', () => {
             const wrapper = createComponent({
-                user: {
+                user: factory('User', {
                     displayName: 'Test McTest',
-                },
+                }),
             });
 
             expect(wrapper.text()).toContain('Test McTest');
@@ -30,9 +30,9 @@ describe('Post', () => {
 
         it('includes the username of the author', () => {
             const wrapper = createComponent({
-                user: {
+                user: factory('User', {
                     username: 'testmctest',
-                },
+                }),
             });
 
             expect(wrapper.text()).toContain('testmctest');
