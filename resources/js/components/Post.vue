@@ -40,10 +40,14 @@
                 type: String|Date,
                 required: true,
             },
+            id: {
+                type: String,
+                required: true,
+            },
             user: {
                 type: Object,
                 required: true,
-            }
+            },
         },
 
         data() {
