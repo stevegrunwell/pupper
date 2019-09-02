@@ -19,7 +19,7 @@ class PostsTest extends TestCase
      */
     public function a_logged_in_user_can_see_the_form_to_create_a_post()
     {
-        $this->actingAs(factory(User::class)->make())
+        $this->actingAs(factory(User::class)->create())
             ->get(route('posts.create'))
             ->assertViewIs('posts.create');
     }
