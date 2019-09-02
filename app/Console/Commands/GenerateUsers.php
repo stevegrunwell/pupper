@@ -35,8 +35,19 @@ class GenerateUsers extends Command
     {
         $earliestDate = Carbon::parse($this->option('earliest-date'));
         $users        = $this->generateUsers($this->option('number'), $earliestDate);
-        $headers      = ['ID', 'Username', '# of Posts'];
-        $table        = $users->map(function ($user) {
+
+        // Randomly assign followers.
+        $users->each(function ($user) use ($users) {
+            $possibleUsers = $users->filter(function ($object) use ($user) {
+                return $user->id !== $object->id;
+            });
+
+            $user->following()->saveMany($possibleUsers->random(mt_rand(1, count($possibleUsers))));
+        });
+
+
+        $headers = ['ID', 'Username', '# of Posts'];
+        $table   = $users->map(function ($user) {
             return [
                 $user->id,
                 $user->username,
