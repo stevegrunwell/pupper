@@ -42,7 +42,7 @@ class GenerateUsers extends Command
                 return $user->id !== $object->id;
             });
 
-            $user->following()->saveMany($possibleUsers->random(mt_rand(1, count($possibleUsers))));
+            $user->following()->attach($possibleUsers->random(mt_rand(1, count($possibleUsers)))->pluck('id'));
         });
 
 
@@ -68,11 +68,10 @@ class GenerateUsers extends Command
         $users         = collect([]);
 
         foreach ($creationDates as $date) {
-            $posts = $this->generatePosts(mt_rand(1, 100), $date);
-            $user  = factory(User::class)->create([
+            $user = factory(User::class)->create([
                 'created_at' => $date,
             ]);
-            $user->posts()->saveMany($posts);
+            $user->posts()->saveMany($this->generatePosts(mt_rand(1, 100), $date));
 
             $users->push($user);
         }
@@ -90,6 +89,7 @@ class GenerateUsers extends Command
 
         foreach ($creationDates as $date) {
             $posts[] = factory(Post::class)->make([
+                'user_id'    => null,
                 'created_at' => $date,
             ]);
         }
