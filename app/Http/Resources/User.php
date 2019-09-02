@@ -20,6 +20,10 @@ class User extends JsonResource
             'username'    => $this->username,
             'displayName' => $this->display_name,
             'url'         => route('users.show', ['user' => $this]),
+            'avatar'      => [
+                'thumbnail' => $this->getAvatarUrl(100),
+                'large'     => $this->getAvatarUrl(720),
+            ],
         ];
     }
 }

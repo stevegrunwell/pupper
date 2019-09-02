@@ -1,25 +1,38 @@
 <template>
-    <article class="card-body border-bottom border-default">
-        <header class="post-meta-header">
-            <p>
-                <span class="h6">{{ user.displayName }}</span>
-                <a
-                    :href="user.url"
-                    class="text-muted"
-                >
-                    @{{ user.username }}
-                </a>
-                <time
-                    class="text-muted"
-                    :datetime="fullCreatedAt"
-                    :title="friendlyCreatedAt"
-                >
-                    {{ timeAgo }}
-                </time>
-            </p>
-        </header>
+    <article class="card-body media border-bottom border-default">
+        <a
+            :href="user.url"
+        >
+            <img
+                :src="user.avatar.thumbnail"
+                alt=""
+                class="avatar mr-3"
+                width="60"
+                height="60"
+            />
+        </a>
+        <div class="media-body">
+            <header class="post-meta-header mb-2">
+                <p class="mb-0">
+                    <span class="h6 pr-2">{{ user.displayName }}</span>
+                    <a
+                        :href="user.url"
+                        class="text-muted"
+                    >
+                        @{{ user.username }}
+                    </a>
+                    <time
+                        class="text-muted pl-2"
+                        :datetime="fullCreatedAt"
+                        :title="friendlyCreatedAt"
+                    >
+                        {{ timeAgo }}
+                    </time>
+                </p>
+            </header>
 
-        {{ content }}
+            {{ content }}
+        </div>
     </article>
 </template>
 
