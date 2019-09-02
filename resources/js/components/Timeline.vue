@@ -2,6 +2,7 @@
     <div
         class="card"
         :class="isLoading ? 'loading' : ''"
+        v-show="isLoading || posts.length"
     >
         <header
             v-show="newPosts.length"
@@ -33,7 +34,7 @@
             </button>
             <p
                 v-else
-                class="text-muted my-2"
+                class="text-muted py-3"
             >
                 Nothing more to show!
             </p>
