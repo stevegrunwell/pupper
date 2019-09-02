@@ -16,7 +16,12 @@ class HomeController extends Controller
     public function index(): Renderable
     {
         if (Auth::check()) {
-            return view('timeline');
+            $user = auth()->user();
+
+            return view('timeline', [
+                'recommendedUsers' => $user->getRecommendedUsers(3),
+                'user'             => $user,
+            ]);
         }
 
         return view('home');
