@@ -23,6 +23,9 @@ describe('Timeline', () => {
             global.axios.get.mockResolvedValue({
                 data: {
                     data: [],
+                    links: {
+                        next: null,
+                    }
                 }
             });
         });
@@ -54,6 +57,9 @@ describe('Timeline', () => {
             global.axios.get.mockResolvedValue({
                 data: {
                     data: factory('Post', 3),
+                    links: {
+                        next: null,
+                    }
                 },
             });
 
@@ -68,6 +74,9 @@ describe('Timeline', () => {
             global.axios.get.mockResolvedValue({
                 data: {
                     data: factory('Post', 2),
+                    links: {
+                        next: null,
+                    }
                 },
             });
 
@@ -76,6 +85,98 @@ describe('Timeline', () => {
             await flushPromises();
 
             expect(wrapper.classes('loading')).toBe(false);
-        })
+        });
+
+        it('can load the next page of posts', async () => {
+            global.axios.get
+                .mockResolvedValueOnce({
+                    data: {
+                        data: factory('Post', 2),
+                        links: {
+                            next: 'https://example.com/api/timeline?page=2',
+                        },
+                    },
+                })
+                .mockResolvedValueOnce({
+                    data: {
+                        data: factory('Post', 2),
+                        links: {
+                            next: null,
+                        },
+                    },
+                });
+
+            const wrapper = createComponent();
+
+            await flushPromises();
+
+            await wrapper.find('.load-more').trigger('click');
+
+            expect(axios.get).toHaveBeenLastCalledWith('https://example.com/api/timeline?page=2');
+            expect(wrapper.findAll(Post).length).toBe(4);
+        });
+
+        it('shows the next page button if there are more posts to show', async () => {
+            global.axios.get
+                .mockResolvedValueOnce({
+                    data: {
+                        data: factory('Post', 2),
+                        links: {
+                            next: 'https://example.com/api/timeline?page=2',
+                        },
+                    },
+                });
+
+            const wrapper = createComponent();
+
+            await flushPromises();
+
+            expect(wrapper.find('.load-more').exists()).toBe(true);
+        });
+
+        it('can load the next page of posts', async () => {
+            global.axios.get
+                .mockResolvedValueOnce({
+                    data: {
+                        data: factory('Post', 2),
+                        links: {
+                            next: 'https://example.com/api/timeline?page=2',
+                        },
+                    },
+                })
+                .mockResolvedValueOnce({
+                    data: {
+                        data: factory('Post', 2),
+                        links: {
+                            next: null,
+                        },
+                    },
+                });
+
+            const wrapper = createComponent();
+
+            await flushPromises();
+            await wrapper.find('.load-more').trigger('click');
+
+            expect(axios.get).toHaveBeenLastCalledWith('https://example.com/api/timeline?page=2');
+        });
+
+        it('hides the next page button if there are no more posts to show', async () => {
+            global.axios.get
+                .mockResolvedValueOnce({
+                    data: {
+                        data: factory('Post', 2),
+                        links: {
+                            next: null,
+                        },
+                    },
+                });
+
+            const wrapper = createComponent();
+
+            await flushPromises();
+
+            expect(wrapper.find('.load-more').exists()).toBe(false);
+        });
     });
 });

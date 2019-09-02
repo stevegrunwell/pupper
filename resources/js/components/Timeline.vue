@@ -8,6 +8,25 @@
             :key="post.id"
             v-bind="post"
         />
+
+        <footer
+            v-if="posts.length"
+            class="card-footer text-center"
+        >
+            <button
+                v-if="nextPage"
+                class="load-more btn btn-default"
+                @click="fetch"
+            >
+                Load more Barks
+            </button>
+            <p
+                v-else
+                class="text-muted my-2"
+            >
+                Nothing more to show!
+            </p>
+        </footer>
     </div>
 </template>
 
@@ -29,6 +48,7 @@
         data() {
             return {
                 isLoading: true,
+                nextPage: this.route,
                 posts: [],
             }
         },
@@ -44,15 +64,23 @@
              * Yes, we just made "fetch" happen.
              */
             fetch() {
-                window.axios.get(this.route)
+                if (! this.nextPage) {
+                    return;
+                }
+
+                window.axios.get(this.nextPage)
                     .then(response => {
+                        response.data.data.forEach((post) => {
+                            this.posts.push(post);
+                        });
+
                         this.isLoading = false;
-                        this.posts = response.data.data;
+                        this.nextPage  = response.data.links.next;
                     })
                     .catch(err => {
                         window.console.error(err);
                     });
-            }
+            },
         }
     };
 </script>

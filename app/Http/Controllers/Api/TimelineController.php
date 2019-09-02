@@ -18,7 +18,7 @@ class TimelineController extends Controller
     {
         $following = $request->user()->following()->select('id')->get()
             ->push($request->user()); // Include the current user's posts.
-        $posts     = Post::fromUsers($following)->get();
+        $posts     = Post::fromUsers($following)->paginate(20);
 
         return PostResource::collection($posts);
     }
@@ -28,6 +28,6 @@ class TimelineController extends Controller
      */
     public function user(User $user, Request $request): ResourceCollection
     {
-        return PostResource::collection($user->posts);
+        return PostResource::collection($user->posts()->paginate(20));
     }
 }
