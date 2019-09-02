@@ -93,4 +93,39 @@ class UserTest extends TestCase
         $this->assertTrue($users[0]->isFollowedBy($users[1]));
         $this->assertFalse($users[0]->isFollowedBy($users[2]));
     }
+
+    /**
+     * @test
+     */
+    public function getRecommendedUsers_should_suggest_relevant_users()
+    {
+        $this->markTestIncomplete();
+        $user = factory(User::class)->create();
+    }
+
+    /**
+     * @test
+     */
+    public function getRecommendedUsers_should_not_include_accounts_the_user_already_follows()
+    {
+        $user      = factory(User::class)->create();
+        $following = $user->following()->saveMany(factory(User::class, 2)->make());
+        $accounts  = factory(User::class, 2)->create();
+
+        $recommendedIds = $user->getRecommendedUsers()->pluck('id');
+
+        $this->assertEmpty($recommendedIds->intersect($user->following->pluck('id')));
+        $this->assertCount(2, $recommendedIds->intersect($accounts->pluck('id')));
+    }
+
+    /**
+     * @test
+     */
+    public function getRecommendedUsers_should_return_an_empty_collection_if_there_are_no_recommendations()
+    {
+        $user = factory(User::class)->create();
+        $user->following()->saveMany(factory(User::class, 3)->make());
+
+        $this->assertEmpty($user->getRecommendedUsers());
+    }
 }
