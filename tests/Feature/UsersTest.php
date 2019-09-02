@@ -49,4 +49,32 @@ class UsersTest extends TestCase
         $this->assertStringContainsString($user->username, $route);
         $this->assertStringNotContainsString($user->id, $route);
     }
+
+    /**
+     * @test
+     */
+    public function it_should_display_the_accounts_a_user_is_following()
+    {
+        $user = factory(User::class)->create();
+        $following = $user->following()->saveMany(factory(User::class, 3)->make());
+
+        $response = $this->get(route('users.following', ['user' => $user]));
+
+        $response->assertViewIs('users.following');
+        $this->assertCount(3, $response->original->users);
+    }
+
+    /**
+     * @test
+     */
+    public function it_should_display_the_accounts_following_the_user()
+    {
+        $user = factory(User::class)->create();
+        $following = $user->followers()->saveMany(factory(User::class, 3)->make());
+
+        $response = $this->get(route('users.followers', ['user' => $user]));
+
+        $response->assertViewIs('users.followers');
+        $this->assertCount(3, $response->original->users);
+    }
 }

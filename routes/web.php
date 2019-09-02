@@ -41,3 +41,7 @@ Route::get('barks/{post}', 'PostController@show')
 // Registering last to ensure usernames can't hijack other routes.
 Route::get('{user}', 'UserController@show')
     ->name('users.show');
+Route::get('{user}/followers', 'UserController@followers')
+    ->name('users.followers');
+Route::get('{user}/following', 'UserController@following')
+    ->name('users.following');

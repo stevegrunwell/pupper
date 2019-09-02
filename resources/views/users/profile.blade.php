@@ -8,20 +8,7 @@
 
 <p>{{ __('Joined :date', ['date' => $user->created_at->format('F Y')]) }}</p>
 
-<dl class="d-flex flex-row justify-content-between">
-    <div>
-        <dt>{{ __('Barks') }}</dt>
-        <dd><a href="{{ route('users.show', ['user' => $user]) }}">{{ $user->posts()->count() }}</a></dd>
-    </div>
-    <div>
-        <dt>{{ __('Followers') }}</dt>
-        <dd>{{ $user->followers()->count() }}</dd>
-    </div>
-    <div>
-        <dt>{{ __('Following') }}</dt>
-        <dd>{{ $user->following()->count() }}</dd>
-    </div>
-</dl>
+@include('users.user-counts', ['user' => $user])
 
 @unless (! auth()->check() || $user->id === auth()->user()->id)
     <follow-button
