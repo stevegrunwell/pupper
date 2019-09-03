@@ -39,6 +39,7 @@ Install npm dependencies:
         - npm run prod
     artifacts:
         paths:
+            - node_modules
             - public
     cache:
         key: ${CI_COMMIT_REF_SLUG}-npm
