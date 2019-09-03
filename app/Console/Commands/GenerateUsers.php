@@ -34,7 +34,7 @@ class GenerateUsers extends Command
     public function handle()
     {
         $earliestDate = Carbon::parse($this->option('earliest-date'));
-        $users        = $this->generateUsers($this->option('number'), $earliestDate);
+        $users        = $this->generateUsers((int) $this->option('number'), $earliestDate);
 
         // Randomly assign followers.
         $users->each(function ($user) use ($users) {
