@@ -39,6 +39,13 @@ class Post extends Model
     protected $keyType = 'string';
 
     /**
+     * Lower the number of results per page.
+     *
+     * @var int
+     */
+    protected $perPage = 20;
+
+    /**
      * The "booting" method of the model.
      *
      * @return void

@@ -3,10 +3,13 @@
 namespace Tests\Feature;
 
 use App\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class HomeTest extends TestCase
 {
+    use RefreshDatabase;
+
     /**
      * @test
      */
@@ -21,7 +24,7 @@ class HomeTest extends TestCase
      */
     public function a_logged_in_user_is_shown_their_timeline()
     {
-        $this->actingAs(factory(User::class)->make())
+        $this->actingAs(factory(User::class)->create())
             ->get(route('home'))
             ->assertViewIs('timeline');
     }

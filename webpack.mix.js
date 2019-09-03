@@ -19,4 +19,5 @@ if (! mix.inProduction()) {
 }
 
 mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css');
+    .sass('resources/sass/app.scss', 'public/css')
+    .copy('resources/img/pupper-icon.svg', 'public/images/pupper-icon.svg');

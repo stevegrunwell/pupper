@@ -1,20 +1,16 @@
 <article class="card">
-    <div class="card-body">
-        <h1 class="card-title h5">{{ $user->display_name }}</h1>
-        <p class="card-subtitle text-muted">{{ $user->username }}</p>
-        <dl class="d-flex flex-row justify-content-between">
-            <div>
-                <dt>{{ __('Barks') }}</dt>
-                <dd><a href="{{ route('users.show', ['user' => $user]) }}">{{ $user->posts()->count() }}</a></dd>
-            </div>
-            <div>
-                <dt>{{ __('Followers') }}</dt>
-                <dd>{{ $user->followers()->count() }}</dd>
-            </div>
-            <div>
-                <dt>{{ __('Following') }}</dt>
-                <dd>{{ $user->following()->count() }}</dd>
-            </div>
-        </dl>
+    <div class="card-body media">
+        <img src="{{ $user->getAvatarUrl(100) }}" alt="" class="avatar mr-3">
+        <div class="media-body">
+            <h3 class="card-title h5">{{ $user->display_name }}</h3>
+            <p class="card-subtitle mb-2">{!! username($user) !!}</p>
+
+            @unless (! auth()->check() || $user->id === auth()->user()->id)
+                <follow-button
+                    username="{{ $user->username }}"
+                    :following="{{ auth()->user()->follows($user) ? 'true' : 'false' }}"
+                />
+            @endunless
+        </div>
     </div>
 </article>

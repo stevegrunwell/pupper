@@ -7,6 +7,51 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+@import 'animations';
+
 .post-meta-header {
     font-size: smaller;
+}
+
+/**
+ * A fixed-width sidebar once we get past a certain width.
+ */
+.sidebar {
+    @include media-breakpoint-up(lg) {
+        width: 360px;
+        max-width: 360px;
+    }
+
+    .user-header {
+        @include media-breakpoint-up(xs) {
+            .avatar {
+                max-width: 25%;
+                margin-right: $spacer;
+            }
+        }
+
+        @include media-breakpoint-up(lg) {
+            .avatar {
+                max-width: 100%;
+                margin-right: auto;
+                margin-bottom: $spacer;
+            }
+        }
+    }
+}
+
+.sticky-sidebar {
+    @extend .position-sticky;
+
+    top: map-get($spacers, 4);
+}
+
+.loading {
+    &:before {
+        content: '';
+        display: block;
+        height: 5rem;
+        background: url('../img/loader.svg') center center no-repeat;
+        animation: heartbeat 1.6s infinite;
+    }
 }

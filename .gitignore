@@ -9,6 +9,7 @@ npm-debug.log
 public/css/*.css
 public/css/*.map
 public/hot
+public/images
 public/js/*.js
 public/js/*.map
 public/mix-manifest.json

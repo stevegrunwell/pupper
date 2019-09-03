@@ -36,9 +36,19 @@ class GenerateUsers extends Command
     public function handle()
     {
         $earliestDate = Carbon::parse($this->option('earliest-date'));
-        $users        = $this->generateUsers($this->option('number'), $earliestDate);
-        $headers      = ['ID', 'Username', '# of Posts'];
-        $table        = $users->map(function ($user) {
+        $users        = $this->generateUsers((int) $this->option('number'), $earliestDate);
+
+        // Randomly assign followers.
+        $users->each(function ($user) use ($users) {
+            $possibleUsers = $users->filter(function ($object) use ($user) {
+                return $user->id !== $object->id;
+            });
+
+            $user->following()->attach($possibleUsers->random(mt_rand(1, count($possibleUsers)))->pluck('id'));
+        });
+
+        $headers = ['ID', 'Username', '# of Posts'];
+        $table   = $users->map(function ($user) {
             return [
                 $user->id,
                 $user->username,
@@ -59,11 +69,10 @@ class GenerateUsers extends Command
         $users         = collect([]);
 
         foreach ($creationDates as $date) {
-            $posts = $this->generatePosts(mt_rand(1, 100), $date);
-            $user  = factory(User::class)->create([
+            $user = factory(User::class)->create([
                 'created_at' => $date,
             ]);
-            $user->posts()->saveMany($posts);
+            $user->posts()->saveMany($this->generatePosts(mt_rand(1, 100), $date));
 
             $users->push($user);
         }
@@ -81,6 +90,7 @@ class GenerateUsers extends Command
 
         foreach ($creationDates as $date) {
             $posts[] = factory(Post::class)->make([
+                'user_id'    => null,
                 'created_at' => $date,
             ]);
         }

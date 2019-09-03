@@ -21,3 +21,6 @@ php artisan migrate
 
 # Symlink /storage/app/public/ to public/storage.
 php artisan storage:link
+
+# Generate test content.
+php artisan pupper:generate-users --number=10

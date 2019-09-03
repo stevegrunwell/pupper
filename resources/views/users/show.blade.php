@@ -1,30 +1,25 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-4">
-            <article class="card">
-                <div class="card-body">
-                    <h1 class="card-title h5">{{ $user->display_name }}</h1>
-                    <p class="card-subtitle text-muted">{{ $user->username }}</p>
-                    <p>{{ __('Joined :date', ['date' => $user->created_at->format('F Y')]) }}</p>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 sidebar">
+                <article class="card sticky-sidebar mb-4">
+                    <div class="card-body">
+                        @include('users.profile', ['user' => $user])
+                    </div>
+                </article>
+            </div>
 
-                    @unless (! auth()->check() || $user->id === auth()->user()->id)
-                        <follow-button
-                            username="{{ $user->username }}"
-                            :following="{{ auth()->user()->follows($user) ? 'true' : 'false' }}"
-                        />
-                    @endunless
-                </div>
-            </article>
-        </div>
-
-        <div class="col-md-8">
-            <div class="card">
-                <timeline route="{{ route('api.userTimeline', ['user' => $user]) }}" />
+            <div class="col">
+                @if ($user->post_count)
+                    <timeline route="{{ route('api.userTimeline', ['user' => $user]) }}" />
+                @else
+                    <section class="pt-5 text-center">
+                    <h2 class="h3 text-muted">{{ __('@:username hasn\'t barked yet.', ['username' => $user->username]) }}</h2>
+                    <p class="text-muted">{{ __('When they do, their barks will show up here.') }}</p>
+                @endif
             </div>
         </div>
     </div>
-</div>
 @endsection
