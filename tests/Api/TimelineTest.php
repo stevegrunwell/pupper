@@ -2,7 +2,6 @@
 
 namespace Tests\Api;
 
-use App\Http\Resources\Post as PostResource;
 use App\Post;
 use App\User;
 use Carbon\Carbon;
@@ -45,9 +44,8 @@ class TimelineTest extends TestCase
         });
 
         $response = $this->actingAs($this->user, 'api')
-            ->get(route('api.timeline'));
-
-        $this->assertContainsOnlyInstancesOf(PostResource::class, $response->original);
+            ->json('GET', route('api.timeline'))
+            ->assertJsonCount(4, 'data');
     }
 
     /**
@@ -110,8 +108,9 @@ class TimelineTest extends TestCase
         $ids = $this->following[0]->posts()->saveMany(factory(Post::class, 3)->make());
         $this->following[1]->posts()->saveMany(factory(Post::class, 2)->make());
 
-        $response = $this->get(route('api.userTimeline', ['user' => $this->following[0]]));
+        $response = $this->json('get', route('api.userTimeline', ['user' => $this->following[0]]));
 
+        $response->assertJsonCount(3, 'data');
         $this->assertEquals(
             $ids->pluck('id')->sort(),
             $response->original->pluck('id')->sort()
