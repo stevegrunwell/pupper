@@ -45,7 +45,6 @@ class GenerateUsers extends Command
             $user->following()->attach($possibleUsers->random(mt_rand(1, count($possibleUsers)))->pluck('id'));
         });
 
-
         $headers = ['ID', 'Username', '# of Posts'];
         $table   = $users->map(function ($user) {
             return [
