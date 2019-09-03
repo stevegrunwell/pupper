@@ -1,0 +1,78 @@
+# CI/CD configuration for Pupper using GitLab's CI/CD Pipeline.
+
+# Base Docker image for builds.
+image: stevegrunwell/laravel-ci-pipeline
+
+# Additional services to make available.
+services:
+  - postgres:9.2
+
+# Environment variables.
+variables:
+  DB_HOST: postgres
+  DB_USERNAME: postgres
+  POSTGRES_DB: pupper_test
+  POSTGRES: postgres
+  POSTGRES_PASSWORD: ""
+
+# Define the "build" step of the pipeline
+#
+# These jobs get the necessary components in place to start testing the application.
+Install Composer dependencies:
+    stage: build
+    script:
+        - composer install --prefer-dist --no-ansi --no-interaction --no-progress
+        - composer prepare-env
+    artifacts:
+        paths:
+            - .env
+            - vendor
+    cache:
+        key: ${CI_COMMIT_REF_SLUG}-composer
+        paths:
+            - vendor
+
+Install npm dependencies:
+    stage: build
+    script:
+        - npm install --no-progress
+        - npm run prod
+    artifacts:
+        paths:
+            - node_modules
+            - public
+    cache:
+        key: ${CI_COMMIT_REF_SLUG}-npm
+        paths:
+            - node_modules
+
+# Begin the "Test" stage of the pipeline.
+#
+# This is where we'll run tests, checks, and other tools to verify that the app behaves the way we
+# expect it to.
+PHPUnit:
+    stage: test
+    script:
+        - phpdbg -qrr -d memory_limit=-1 vendor/bin/phpunit --testdox --coverage-text --colors=always
+    artifacts:
+        paths:
+            - storage/logs
+
+Jest:
+    stage: test
+    script:
+        - npm run test-all
+
+Check coding standards:
+    stage: test
+    script:
+        - composer coding-standards
+    cache:
+        key: ${CI_COMMIT_REF_SLUG}-php-cs-fixer
+        paths:
+            - .php_cs.cache
+
+Static code analysis:
+    stage: test
+    script:
+        - php artisan code:analyse --no-progress

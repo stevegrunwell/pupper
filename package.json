@@ -9,6 +9,7 @@
         "prod": "npm run production",
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
         "test": "cross-env NODE_ENV=test jest",
+        "test-all": "npm run test -- --all",
         "test-watch": "npm run test -- --watch"
     },
     "dependencies": {
@@ -20,7 +21,7 @@
         "axios": "^0.18",
         "babel-core": "^7.0.0-bridge.0",
         "bootstrap": "^4.1.0",
-        "cross-env": "^5.1",
+        "cross-env": "^5.2.1",
         "factoria": "^2.0.1",
         "flush-promises": "^1.0.2",
         "jest": "^24.8.0",
