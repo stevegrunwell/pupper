@@ -12,7 +12,7 @@ class HelpersTest extends TestCase
 {
     /**
      * @test
-     * @covers username()
+     * @covers ::username()
      */
     public function username_should_prepend_an_at_sign()
     {
