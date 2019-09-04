@@ -27,6 +27,17 @@
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">./app</directory>
+
+            <exclude>
+                <!-- Default, Laravel scaffolding that is unmodified. -->
+                <file>./app/Http/Controllers/Auth/ForgotPasswordController.php</file>
+                <file>./app/Http/Controllers/Auth/ResetPasswordController.php</file>
+                <file>./app/Http/Controllers/Auth/VerificationController.php</file>
+
+                <!-- Exclude these console commands, since they're only for the demo. -->
+                <file>./app/Console/Commands/GeneratePost.php</file>
+                <file>./app/Console/Commands/GenerateUsers.php</file>
+            </exclude>
         </whitelist>
     </filter>
     <php>

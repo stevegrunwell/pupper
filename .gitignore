@@ -15,6 +15,7 @@ public/js/*.map
 public/mix-manifest.json
 public/storage
 storage/*.key
+tests/coverage
 user-customizations.sh
 Vagrantfile
 vendor
