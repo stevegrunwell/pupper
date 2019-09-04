@@ -60,8 +60,12 @@
         "static-analysis": [
             "@php artisan code:analyse"
         ],
+        "test": [
+            "phpunit --testdox --color=always",
+            "@coding-standards"
+        ],
         "test-coverage": [
-            "phpdbg -qrr -d memory_limit=-1 ./vendor/bin/phpunit --coverage-html=tests/coverage || echo \"Unable to generate code coverage!\""
+            "phpdbg -qrr -d memory_limit=-1 ./vendor/bin/phpunit --coverage-html=tests/coverage"
         ]
     },
     "scripts-descriptions": {
@@ -69,6 +73,7 @@
         "homestead": "Build a development environment using Laravel Homestead.",
         "prepare-env": "Copy the .env.example file and generate an application key.",
         "static-analysis": "Perform static code analysis on the codebase.",
+        "tests": "Execute the test suite.",
         "test-coverage": "Generate test coverage reports into tests/coverage."
     },
     "minimum-stability": "dev",
