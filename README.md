@@ -29,7 +29,7 @@ $ cd pupper
 $ composer install
 ```
 
-Don't worry about the version of PHP you're running locally, the `composer.json` file tells Composer to install as though we're using PHP 5.3 (which will be pre-configured in the Homestead virtual machine).
+Don't worry about the version of PHP you're running locally, the `composer.json` file tells Composer to install as though we're using PHP 7.3 (which will be pre-configured in the Homestead virtual machine).
 
 ### Creating the Homestead VM
 
