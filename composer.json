@@ -63,7 +63,8 @@
         ],
         "test": [
             "phpunit --testdox --color=always",
-            "@coding-standards"
+            "@coding-standards",
+            "@static-analysis"
         ],
         "test-coverage": [
             "phpdbg -qrr -d memory_limit=-1 ./vendor/bin/phpunit --coverage-html=public/test-coverage"

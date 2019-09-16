@@ -47,6 +47,51 @@ $ vagrant up
 
 If everything worked properly, Pupper should be accessible via <https://pupper.test>.
 
+## Running tests
+
+The application test suite is written using [PHPUnit](https://phpunit.de/), installed via Composer. The test suite may be run at any time by running the following from within the VM:
+
+```sh
+$ ./vendor/bin/phpunit
+```
+
+You may also use the following Composer script from within the Homestead VM to run all tests (PHPUnit, coding standards, static code analysis, etc.):
+
+```sh
+$ composer test
+```
+
+### Coding standards
+
+Pupper is written according to the [PSR-2 coding standard](https://www.php-fig.org/psr/psr-2/) and ships with configurations for [PHP_CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer) and [PHP Coding Standards Fixer](https://github.com/FriendsOfPHP/PHP-CS-Fixer) for verifying adherence to these standards.
+
+You may run the coding standards checks at any time by running the following Composer script from within the VM:
+
+```sh
+$ composer coding-standards
+```
+
+### Static code analysis
+
+The Pupper repository also includes a [PHPStan](https://github.com/phpstan/phpstan) configuration for performing static code analysis:
+
+```sh
+$ composer static-analysis
+```
+
+
+### Code coverage reports
+
+A custom Composer script has been registered to generate HTML code coverage reports, which help highlight areas that may be under-tested.
+
+To generate the reports, run the following:
+
+```sh
+$ composer test-coverage
+```
+
+The reports will be available at <https://pupper.test/test-coverage>.
+
 ## Credits
 
 Iconography for the application comes from [The Noun Project](https://thenounproject.com/), and is used under a Creative-Commons License:
