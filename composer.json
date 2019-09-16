@@ -66,7 +66,7 @@
             "@coding-standards"
         ],
         "test-coverage": [
-            "phpdbg -qrr -d memory_limit=-1 ./vendor/bin/phpunit --coverage-html=tests/coverage"
+            "phpdbg -qrr -d memory_limit=-1 ./vendor/bin/phpunit --coverage-html=public/test-coverage"
         ]
     },
     "scripts-descriptions": {
