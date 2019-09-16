@@ -17,6 +17,7 @@ class HomeController extends Controller
     {
         if ($request->user()) {
             $user = $request->user();
+            $user->loadCount(['following', 'followers']);
 
             return view('timeline', [
                 'recommendedUsers' => $user->getRecommendedUsers(3),
