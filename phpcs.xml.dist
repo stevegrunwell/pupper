@@ -19,9 +19,10 @@
         <exclude-pattern>tests/*</exclude-pattern>
     </rule>
 
-    <!-- Don't restrict line-length for console commands. -->
+    <!-- Don't restrict line-length for console commands or translations. -->
     <rule ref="Generic.Files.LineLength.TooLong">
         <exclude-pattern>app/Console/Commands/*</exclude-pattern>
+        <exclude-pattern>resources/lang/*</exclude-pattern>
     </rule>
 
     <rule ref="PSR2"/>
