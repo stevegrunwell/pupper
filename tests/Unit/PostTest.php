@@ -2,10 +2,12 @@
 
 namespace Tests\Unit;
 
+use App\Events\PostCreated;
 use App\Post;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
 
 /**
@@ -65,5 +67,22 @@ class PostTest extends TestCase
 
         $this->assertCount(6, $postIds);
         $this->assertEquals($expected->sort(), $postIds->sort());
+    }
+
+    /**
+     * @test
+     * @group Events
+     */
+    public function a_PostCreated_event_should_be_fired_upon_post_creation()
+    {
+        Event::fake([
+            PostCreated::class,
+        ]);
+
+        $post = factory(Post::class)->create();
+
+        Event::assertDispatched(PostCreated::class, function ($event) use ($post) {
+            return $event->post->is($post);
+        });
     }
 }

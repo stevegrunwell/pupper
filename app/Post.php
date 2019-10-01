@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Events\PostCreated;
 use App\Scopes\ReverseChronologicalOrderScope;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -12,6 +13,15 @@ use Illuminate\Support\Collection;
 class Post extends Model
 {
     use SoftDeletes;
+
+    /**
+     * The event map for the model.
+     *
+     * @var array
+     */
+    protected $dispatchesEvents = [
+        'created' => PostCreated::class,
+    ];
 
     /**
      * The attributes that are mass assignable.
