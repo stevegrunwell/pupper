@@ -18,7 +18,7 @@
         "mockery/mockery": "^1.0",
         "mohammedmanssour/form-request-tester": "dev-master",
         "nunomaduro/collision": "^3.0",
-        "nunomaduro/larastan": "^0.3.17",
+        "nunomaduro/larastan": "^0.4",
         "phpunit/phpunit": "^8.0",
         "squizlabs/php_codesniffer": "^3.4",
         "stevegrunwell/phpunit-markup-assertions": "^1.2"
