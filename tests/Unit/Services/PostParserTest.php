@@ -4,6 +4,7 @@ namespace Tests\Unit\Services;
 
 use App\Post;
 use App\Services\PostParser;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Arr;
 use Tests\TestCase;
 
@@ -12,6 +13,8 @@ use Tests\TestCase;
  */
 class PostParserTest extends TestCase
 {
+    use RefreshDatabase;
+
     /**
      * @test
      * @dataProvider provide_valid_usernames()
