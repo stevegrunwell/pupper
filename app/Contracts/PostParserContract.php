@@ -3,7 +3,6 @@
 namespace App\Contracts;
 
 use App\Post;
-use Illuminate\Support\Collection;
 
 interface PostParserContract
 {

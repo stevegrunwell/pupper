@@ -26,7 +26,7 @@ class PostParserTest extends TestCase
         ]);
 
         $this->assertSame([
-            $username
+            $username,
         ], (new PostParser($post))->getUsernames());
     }
 

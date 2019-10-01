@@ -6,8 +6,6 @@ use App\Contracts\PostParserContract;
 use App\Events\PostCreated;
 use App\Notifications\MentionedInPost;
 use App\User;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Notification;
 
 class InspectNewPost
