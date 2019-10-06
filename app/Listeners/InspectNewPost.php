@@ -25,7 +25,9 @@ class InspectNewPost
 
         if ($usernames) {
             Notification::send(
-                User::whereIn('username', $usernames)->get(),
+                User::whereIn('username', $usernames)
+                    ->where('id', '!=', $event->post->user->id)
+                    ->get(),
                 new MentionedInPost($event->post)
             );
         }

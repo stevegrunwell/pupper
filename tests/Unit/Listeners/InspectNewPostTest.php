@@ -16,6 +16,7 @@ use Tests\TestCase;
 
 /**
  * @group Listeners
+ * @group Notifications
  */
 class InspectNewPostTest extends TestCase
 {
@@ -86,6 +87,23 @@ class InspectNewPostTest extends TestCase
             ->andReturn(['someuser']);
 
         $this->handle();
+
+        Notification::assertNothingSent();
+    }
+
+    /**
+     * @test
+     */
+    public function a_user_should_not_be_notified_about_their_own_posts()
+    {
+        Notification::fake();
+
+        $post = factory(Post::class)->create();
+
+        $this->parser->shouldReceive('getUsernames')
+            ->andReturn([$post->user->username]);
+
+        (new InspectNewPost)->handle(new PostCreated($post));
 
         Notification::assertNothingSent();
     }
