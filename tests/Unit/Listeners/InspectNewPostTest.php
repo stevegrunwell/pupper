@@ -103,7 +103,7 @@ class InspectNewPostTest extends TestCase
         $this->parser->shouldReceive('getUsernames')
             ->andReturn([$post->user->username]);
 
-        (new InspectNewPost)->handle(new PostCreated($post));
+        $this->handle($post);
 
         Notification::assertNothingSent();
     }
@@ -111,8 +111,10 @@ class InspectNewPostTest extends TestCase
     /**
      * Invoke the handle() method.
      */
-    protected function handle()
+    protected function handle(Post $post = null)
     {
-        (new InspectNewPost)->handle(new PostCreated(factory(Post::class)->make()));
+        $event = new PostCreated($post ?: factory(Post::class)->make());
+
+        (new InspectNewPost)->handle($event);
     }
 }
