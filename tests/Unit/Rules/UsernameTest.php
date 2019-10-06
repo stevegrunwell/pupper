@@ -58,6 +58,14 @@ class UsernameTest extends TestCase
     }
 
     /**
+     * @test
+     */
+    public function username_validation_errors_use_a_custom_message()
+    {
+        $this->assertSame(trans('validation.username'), (new Username)->message());
+    }
+
+    /**
      * Shortcut for validating a username against the Username rule.
      *
      * @param string $username The username to validate.
