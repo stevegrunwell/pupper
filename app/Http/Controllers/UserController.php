@@ -58,9 +58,13 @@ class UserController extends Controller
     public function notifications(Request $request): Renderable
     {
         $user = $request->user();
+        $notifications = $user->notifications;
+
+        // Mark the unread notifications as read.
+        $user->unreadNotifications->markAsRead();
 
         return view('users.notifications')->with([
-            'notifications' => $user->notifications,
+            'notifications' => $notifications,
             'user'          => $user,
         ]);
     }

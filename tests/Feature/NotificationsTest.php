@@ -59,6 +59,16 @@ class NotificationsTest extends TestCase
      */
     public function notifications_should_be_marked_as_read_upon_first_load()
     {
-        $this->markTestIncomplete();
+        $user = factory(User::class)->create();
+        $user->notify(new MentionedInPost(factory(Post::class)->create()));
+
+        $this->assertCount(1, $user->unreadNotifications);
+
+        $this->actingAs($user)
+            ->get(route('notifications'));
+
+        $user->refresh();
+
+        $this->assertCount(0, $user->unreadNotifications);
     }
 }

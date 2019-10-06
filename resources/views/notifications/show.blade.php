@@ -1,4 +1,4 @@
-<article class="card-body border-bottom border-default">
+<article class="card-body border-bottom border-default {{ ! $read ? 'bg-light' : '' }}">
     <h2 class="card-title h6">
         <a href="{{ route('posts.show', ['post' => data_get($notification, 'post.id')]) }}" class="text-body">
             {{ __(':name mentioned you in a Bark:', ['name' => data_get($notification, 'post.user.displayName')]) }}

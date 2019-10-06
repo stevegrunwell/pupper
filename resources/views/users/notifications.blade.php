@@ -15,7 +15,7 @@
             <h1 class="sr-only">{{ __('Notifications') }}</h1>
             <div class="card">
                 @foreach($notifications as $notification)
-                    @includeIf('notifications.show', ['notification' => $notification->data])
+                    @include('notifications.show', ['notification' => $notification->data, 'read' => (bool) $notification->read_at])
                 @endforeach
             </div>
         </div>
