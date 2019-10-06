@@ -11,7 +11,7 @@ class MentionedInPost extends Notification
     /**
      * @var \App\Post
      */
-    private $post;
+    public $post;
 
     /**
      * Create a new notification instance.
@@ -42,6 +42,9 @@ class MentionedInPost extends Notification
      */
     public function toArray($notifiable)
     {
-        return new PostResource($this->post);
+        return [
+            'post' => $this->post,
+            'type' => 'mentioned',
+        ];
     }
 }
