@@ -7,6 +7,7 @@ use App\Scopes\ReverseChronologicalOrderScope;
 use App\User;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -48,6 +49,19 @@ class UserController extends Controller
                     $query->withoutGlobalScope(ReverseChronologicalOrderScope::class);
                 }])
                 ->get(),
+        ]);
+    }
+
+    /**
+     * Show the user's notifications.
+     */
+    public function notifications(Request $request): Renderable
+    {
+        $user = $request->user();
+
+        return view('users.notifications')->with([
+            'notifications' => $user->notifications,
+            'user'          => $user,
         ]);
     }
 }

@@ -32,6 +32,10 @@ Route::middleware(['auth'])->group(function () {
         'store'   => 'posts.store',
         'destroy' => 'posts.destroy',
     ]);
+
+    // Notifications
+    Route::get('notifications', 'UserController@notifications')
+        ->name('notifications');
 });
 
 // All users can see posts.

@@ -43,7 +43,7 @@ class MentionedInPost extends Notification
     public function toArray($notifiable)
     {
         return [
-            'post' => $this->post,
+            'post' => new PostResource($this->post),
             'type' => 'mentioned',
         ];
     }
