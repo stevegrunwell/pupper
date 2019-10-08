@@ -77,7 +77,7 @@
                 return this.date.toUTCString();
             },
             timeAgo() {
-                return timeAgo.format(this.date, 'twitter');
+                return timeAgo.format(this.date, 'twitter') || 'just now';
             },
         }
     };
