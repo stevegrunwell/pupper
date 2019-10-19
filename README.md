@@ -15,6 +15,7 @@ The project comes pre-packaged with a [Laravel Homestead instance](https://larav
     - [VMWare](https://www.vmware.com/)
     - [Parallels](https://www.parallels.com/products/desktop/)
     - [Hyper-V](https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v)
+* [Vagrant Host Manager plugin](https://github.com/devopsgroup-io/vagrant-hostmanager) (required in some environments)
 
 Once those dependencies are satisfied, clone the project from GitHub and install its dependencies:
 
