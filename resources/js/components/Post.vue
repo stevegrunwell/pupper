@@ -32,6 +32,20 @@
             </header>
 
             {{ content }}
+
+            <footer class="mt-2 post-footer">
+                <button
+                    class="btn btn-link text-muted"
+                    data-toggle="modal"
+                    data-target="#createPostModal"
+                    :data-prefill="replyPrefill"
+                    :data-parent-post="id"
+                    aria-label="Reply to this Bark"
+                    title="Reply to this Bark"
+                >
+                    <span class="oi oi-comment-square reply-button" aria-hidden="true"></span>
+                </button>
+            </footer>
         </div>
     </article>
 </template>
@@ -75,6 +89,9 @@
             },
             friendlyCreatedAt() {
                 return this.date.toUTCString();
+            },
+            replyPrefill() {
+                return `@${this.user.username}`;
             },
             timeAgo() {
                 return timeAgo.format(this.date, 'twitter') || 'just now';
