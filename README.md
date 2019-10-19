@@ -27,7 +27,7 @@ $ git clone git@github.com:stevegrunwell/pupper.git
 $ cd pupper
 
 # Install Composer dependencies
-$ composer install
+$ composer install --ignore-platform-reqs
 ```
 
 Don't worry about the version of PHP you're running locally, the `composer.json` file tells Composer to install as though we're using PHP 7.3 (which will be pre-configured in the Homestead virtual machine).
