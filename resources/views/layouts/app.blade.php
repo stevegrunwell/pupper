@@ -74,7 +74,7 @@
                                 </div>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('posts.create') }}" class="btn btn-primary">{{ __('Bark') }}</a>
+                                <a href="{{ route('posts.create') }}" class="btn btn-primary" data-toggle="modal" data-target="#createPostModal">{{ __('Bark') }}</a>
                             </li>
                         @endguest
                     </ul>
@@ -85,6 +85,8 @@
         <main class="py-4">
             @yield('content')
         </main>
+
+        <create-post-modal route="{{ route('api.posts.store') }}" ref="createPostModal" />
     </div>
 </body>
 </html>

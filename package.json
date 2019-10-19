@@ -13,7 +13,8 @@
         "test-watch": "npm run test -- --watch"
     },
     "dependencies": {
-        "javascript-time-ago": "^2.0.2"
+        "javascript-time-ago": "^2.0.2",
+        "open-iconic": "^1.1.1"
     },
     "devDependencies": {
         "@babel/polyfill": "^7.6.0",

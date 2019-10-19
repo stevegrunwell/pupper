@@ -38,14 +38,4 @@ class PostController extends Controller
             'post' => new PostResource($post),
         ]);
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Post $post)
-    {
-    }
 }

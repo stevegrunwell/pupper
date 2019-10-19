@@ -16,8 +16,11 @@ class UserController extends Controller
      */
     public function show(User $user): Renderable
     {
+        $user->loadCount(['posts' => function (Builder $query) {
+            $query->withoutGlobalScope(ReverseChronologicalOrderScope::class);
+        }]);
+
         return view('users.show')->with([
-            'posts' => PostResource::collection($user->posts),
             'user'  => $user,
         ]);
     }

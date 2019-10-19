@@ -12,7 +12,7 @@
             </div>
 
             <div class="col">
-                @if ($user->post_count)
+                @if ($user->posts_count)
                     <timeline route="{{ route('api.userTimeline', ['user' => $user]) }}" />
                 @else
                     <section class="pt-5 text-center">

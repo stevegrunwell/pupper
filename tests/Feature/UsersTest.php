@@ -24,9 +24,20 @@ class UsersTest extends TestCase
 
         $response->assertViewIs('users.show');
         $response->assertViewHas([
-            'posts',
             'user',
         ]);
+    }
+
+    /**
+     * @test
+     */
+    public function a_user_profile_should_return_the_posts_count()
+    {
+        $user = factory(User::class)->create();
+
+        $response = $this->get(route('users.show', ['user' => $user]));
+
+        $this->assertArrayHasKey('posts_count', $response->original->user->toArray());
     }
 
     /**
