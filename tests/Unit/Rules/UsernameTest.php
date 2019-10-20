@@ -11,59 +11,8 @@ use Tests\TestCase;
 class UsernameTest extends TestCase
 {
     /**
-     * @testWith ["myusername"]
-     *           ["my_username"]
-     *           ["myUsername"]
-     *           ["myusername123"]
-     *           ["_my_username_"]
+     * @todo Write some tests in here!
      */
-    public function test_with_valid_names(string $username)
-    {
-        $this->assertTrue($this->validateUsername($username));
-    }
-
-    /**
-     * @test
-     */
-    public function usernames_may_not_contain_spaces()
-    {
-        $this->assertFalse($this->validateUsername('user name'));
-    }
-
-    /**
-     * @test
-     */
-    public function usernames_may_not_contain_the_at_symbol()
-    {
-        $this->assertFalse($this->validateUsername('@username'));
-    }
-
-    /**
-     * @test
-     * @testWith ["#username"]
-     *           ["<username>"]
-     *           ["username!"]
-     */
-    public function usernames_may_not_contain_other_special_characters(string $username)
-    {
-        $this->assertFalse($this->validateUsername($username));
-    }
-
-    /**
-     * @test
-     */
-    public function usernames_may_not_begin_with_digits()
-    {
-        $this->assertFalse($this->validateUsername('123username'));
-    }
-
-    /**
-     * @test
-     */
-    public function username_validation_errors_use_a_custom_message()
-    {
-        $this->assertSame(trans('validation.username'), (new Username)->message());
-    }
 
     /**
      * Shortcut for validating a username against the Username rule.
