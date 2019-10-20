@@ -12,7 +12,7 @@ class HomeTest extends TestCase
     use MarkupAssertionsTrait,
         RefreshDatabase;
 
-    /**
+    /*
      * @todo Write tests around the existing business logic.
      *
      * - A guest should be shown the marketing homepage.
