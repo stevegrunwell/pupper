@@ -12,47 +12,12 @@ class HomeTest extends TestCase
     use MarkupAssertionsTrait,
         RefreshDatabase;
 
-    /**
-     * @test
+    /*
+     * @todo Write tests around the existing business logic.
+     *
+     * - A guest should be shown the marketing homepage.
+     * - A logged in user is shown their timeline.
+     * - If a logged in user is not following anyone, they should be shown an onboarding screen.
+     * - The onboarding screen should *not* be shown once the user follows someone.
      */
-    public function a_guest_is_shown_the_marketing_homepage()
-    {
-        $this->get(route('home'))
-            ->assertViewIs('home');
-    }
-
-    /**
-     * @test
-     */
-    public function a_logged_in_user_is_shown_their_timeline()
-    {
-        $this->actingAs(factory(User::class)->create())
-            ->get(route('home'))
-            ->assertViewIs('timeline');
-    }
-
-    /**
-     * @test
-     */
-    public function a_user_that_is_not_following_anyone_should_be_shown_an_onboarding_screen()
-    {
-        $response = $this->actingAs(factory(User::class)->create())
-            ->get(route('home'));
-
-        $this->assertContainsSelector('.jumbotron', $response->original);
-    }
-
-    /**
-     * @test
-     */
-    public function the_onboarding_screen_should_not_be_shown_once_the_user_follows_someone()
-    {
-        $user = factory(User::class)->create();
-        $user->following()->saveMany(factory(User::class, 2)->make());
-
-        $response = $this->actingAs($user)
-            ->get(route('home'));
-
-        $this->assertNotContainsSelector('.jumbotron', $response->original);
-    }
 }
