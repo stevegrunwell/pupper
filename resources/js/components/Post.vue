@@ -33,7 +33,7 @@
 
             {{ content }}
 
-            <!--<footer class="mt-2 post-footer">
+            <footer class="mt-2 post-footer">
                 <button
                     class="btn btn-link text-muted"
                     data-toggle="modal"
@@ -45,7 +45,7 @@
                 >
                     <span class="oi oi-comment-square reply-button" aria-hidden="true"></span>
                 </button>
-            </footer>-->
+            </footer>
         </div>
     </article>
 </template>
