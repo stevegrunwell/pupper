@@ -16,6 +16,12 @@
                 <div class="card-body">
                     {{ $post->content }}
                 </div>
+
+                @foreach($replies as $reply)
+                   <div class="card-body">
+                    {{ $reply->content }}
+                   </div>
+                @endforeach
             </article>
         </div>
     </div>

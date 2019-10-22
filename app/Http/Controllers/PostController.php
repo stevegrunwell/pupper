@@ -35,7 +35,8 @@ class PostController extends Controller
     public function show(Post $post): Renderable
     {
         return view('posts.show')->with([
-            'post' => new PostResource($post),
+            'post'    => new PostResource($post),
+            'replies' => $post->replies,
         ]);
     }
 }

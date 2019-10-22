@@ -100,4 +100,12 @@ class Post extends Model
     {
         return $query->whereIn('user_id', $users->pluck('id')->toArray());
     }
+
+    /**
+     * Filter out posts that are replies to users we don't follow.
+     */
+    public function scopeNotRepliesToStrangers(): Builder
+    {
+
+    }
 }

@@ -65,4 +65,20 @@ class PostsTest extends TestCase
         $response->assertViewIs('posts.show');
         $this->assertTrue($response->original['post']->is($post));
     }
+
+    /**
+     * @test
+     */
+    public function replies_to_a_post_should_be_included_under_the_original_post()
+    {
+        $post  = factory(Post::class)->create();
+        $reply = $post->replies()->save(factory(Post::class)->make());
+        $post->replies;
+
+        $response = $this->get(route('posts.show', ['post' => $post]));
+        $response->assertViewHas([
+            'replies' => $post->replies,
+        ]);
+        $response->assertSee($reply->content);
+    }
 }

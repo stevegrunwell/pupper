@@ -103,6 +103,26 @@ class TimelineTest extends TestCase
     /**
      * @test
      */
+    public function a_user_should_not_see_replies_unless_they_are_following_the_recipient()
+    {
+        $stranger     = factory(User::class)->create();
+        $strangerPost = $stranger->posts()->save(factory(Post::class)->make());
+        $post         = $this->user->following->first()
+            ->posts()->save(factory(Post::class)->make([
+                'parent_id' => $strangerPost->id,
+                'content'   => '@' . $stranger->username . ' This is my reply',
+            ]));
+
+        $response = $this->actingAs($this->user, 'api')
+            ->get(route('api.timeline'))
+            ->assertJsonMissing([
+                'id' => $post->id,
+            ]);
+    }
+
+    /**
+     * @test
+     */
     public function a_user_timeline_should_only_include_posts_from_the_user()
     {
         $ids = $this->following[0]->posts()->saveMany(factory(Post::class, 3)->make());
