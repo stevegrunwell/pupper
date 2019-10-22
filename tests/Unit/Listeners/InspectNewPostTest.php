@@ -92,6 +92,24 @@ class InspectNewPostTest extends TestCase
     }
 
     /**
+     * @test
+     * @ticket https://example.com
+     */
+    public function a_user_should_not_be_notified_about_their_own_posts()
+    {
+        Notification::fake();
+
+        $post = factory(Post::class)->create();
+
+        $this->parser->shouldReceive('getUsernames')
+            ->andReturn([$post->user->username]);
+
+        $this->handle($post);
+
+        Notification::assertNothingSent();
+    }
+
+    /**
      * Invoke the handle() method.
      */
     protected function handle(Post $post = null)

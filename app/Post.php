@@ -106,6 +106,6 @@ class Post extends Model
      */
     public function scopeNotRepliesToStrangers(): Builder
     {
-
+        // @todo some stuff
     }
 }

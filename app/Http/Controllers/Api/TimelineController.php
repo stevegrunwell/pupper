@@ -16,10 +16,9 @@ class TimelineController extends Controller
      */
     public function index(Request $request): ResourceCollection
     {
-        $includedUsers = $request->user()->following()->select('id')->get()
-            ->whereNotIn(User::whereNotIn($request->user()->following->pluck('id')))
+        $following = $request->user()->following()->select('id')->get()
             ->push($request->user()); // Include the current user's posts.
-        $posts     = Post::fromUsers($includedUsers)->paginate();
+        $posts     = Post::fromUsers($following)->paginate();
 
         return PostResource::collection($posts);
     }

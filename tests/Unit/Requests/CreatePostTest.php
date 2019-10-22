@@ -45,7 +45,7 @@ class CreatePostTest extends TestCase
         $response = $this->formRequest(CreatePost::class, [
             'parent_id' => $parent->id,
         ])
-           ->assertValidationErrorsMissing(['parent_id']);
+            ->assertValidationErrorsMissing(['parent_id']);
     }
 
     /**
@@ -58,6 +58,6 @@ class CreatePostTest extends TestCase
         $response = $this->formRequest(CreatePost::class, [
             'parent_id' => $id,
         ])
-           ->assertValidationErrors(['parent_id']);
+            ->assertValidationErrors(['parent_id']);
     }
 }
