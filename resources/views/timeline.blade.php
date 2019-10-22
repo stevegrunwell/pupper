@@ -13,7 +13,7 @@
 
             <div class="col">
                 @if (! auth()->user()->following_count)
-                    <section class="jumbotron bg-white border">
+                    <section class="jumbotron bg-white border onboarding-screen">
                         <h2 class="display-4">{{ __('Get the most out of Pupper.') }}</h2>
                         <p class="lead">{{ __('Follow other users to see their barks appear in your timeline.') }}</p>
                         @foreach($recommendedUsers as $account)
