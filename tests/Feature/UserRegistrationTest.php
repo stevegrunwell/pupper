@@ -31,6 +31,7 @@ class UserRegistrationTest extends TestCase
 
     /**
      * @test
+     * @covers App\Http\Controllers\Auth\RegisterController
      */
     public function a_new_user_can_be_registered()
     {
