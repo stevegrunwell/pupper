@@ -30,6 +30,7 @@ class Post extends Model
      */
     protected $fillable = [
         'content',
+        'parent_id',
     ];
 
     /**
@@ -38,7 +39,8 @@ class Post extends Model
      * @var array
      */
     protected $casts = [
-        'id' => 'string',
+        'id'        => 'string',
+        'parent_id' => 'string',
     ];
 
     /**
@@ -73,6 +75,22 @@ class Post extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * A post can have many replies.
+     */
+    public function replies()
+    {
+        return $this->hasMany(Post::class, 'parent_id');
+    }
+
+    /**
+     * A post can be in reply to another post.
+     */
+    public function parent()
+    {
+        return $this->belongsTo(Post::class, 'parent_id');
     }
 
     /**

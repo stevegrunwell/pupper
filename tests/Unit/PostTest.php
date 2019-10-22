@@ -85,4 +85,32 @@ class PostTest extends TestCase
             return $event->post->is($post);
         });
     }
+
+    /**
+     * @test
+     */
+    public function a_post_can_have_many_replies()
+    {
+        $post    = factory(Post::class)->create();
+        $replies = $post->replies()->saveMany(factory(Post::class, 3)->make());
+        $post->refresh();
+
+        $this->assertCount(3, $post->replies);
+        $this->assertSame(
+            $replies->pluck('id')->sort()->toArray(),
+            $post->replies->pluck('id')->sort()->toArray()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function a_post_can_reference_its_parent_post()
+    {
+        $post  = factory(Post::class)->create();
+        $reply = $post->replies()->save(factory(Post::class)->make());
+        $post->refresh();
+
+        $this->assertTrue($post->is($reply->parent));
+    }
 }

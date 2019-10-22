@@ -3,6 +3,9 @@
 namespace Tests\Unit;
 
 use App\Http\Requests\CreatePost;
+use App\Post;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Str;
 use MohammedManssour\FormRequestTester\TestsFormRequests;
 use Tests\TestCase;
 
@@ -13,7 +16,8 @@ use Tests\TestCase;
  */
 class CreatePostTest extends TestCase
 {
-    use TestsFormRequests;
+    use TestsFormRequests,
+        RefreshDatabase;
 
     /**
      * @test
@@ -29,5 +33,31 @@ class CreatePostTest extends TestCase
             'content' => $value,
         ])
             ->assertValidationErrors('content');
+    }
+
+    /**
+     * @test
+     */
+    public function a_parent_id_must_be_a_valid_uuid()
+    {
+        $parent = factory(Post::class)->create();
+
+        $response = $this->formRequest(CreatePost::class, [
+            'parent_id' => $parent->id,
+        ])
+           ->assertValidationErrorsMissing(['parent_id']);
+    }
+
+    /**
+     * @test
+     */
+    public function a_parent_id_must_be_another_post()
+    {
+        $id = (string) Str::uuid();
+
+        $response = $this->formRequest(CreatePost::class, [
+            'parent_id' => $id,
+        ])
+           ->assertValidationErrors(['parent_id']);
     }
 }

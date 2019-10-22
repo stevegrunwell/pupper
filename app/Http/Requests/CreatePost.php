@@ -24,7 +24,8 @@ class CreatePost extends FormRequest
     public function rules()
     {
         return [
-            'content' => 'required|string|max:240',
+            'content'   => 'required|string|max:240',
+            'parent_id' => 'nullable|uuid|exists:posts,id',
         ];
     }
 }

@@ -71,4 +71,24 @@ class PostsTest extends TestCase
 
         $this->assertTrue($post->trashed());
     }
+
+    /**
+     * @test
+     */
+    public function a_user_can_reply_to_another_post()
+    {
+        $parent = factory(Post::class)->create();
+        $user   = factory(User::class)->create();
+
+        $this->actingAs($user)
+            ->post(route('api.posts.store'), [
+                'parent_id' => $parent->id,
+                'content'   => 'George Harrison',
+            ]);
+
+        $parent->refresh();
+
+        $this->assertCount(1, $parent->replies);
+        $this->assertSame('George Harrison', $parent->replies[0]->content);
+    }
 }

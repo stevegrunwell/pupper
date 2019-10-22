@@ -75,7 +75,7 @@
 
                 window.axios.post(this.route, {
                     content: document.getElementById('post-content').value,
-                    parentPost: this.parentPost,
+                    parent_id: this.parentPost,
                 })
                     .then(response => {
                         if (201 === response.status) {
